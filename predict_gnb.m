@@ -31,7 +31,7 @@ function label = predict_gnb(X,Y,Xnew)
 [C,~,Y] = unique(Y,'stable');
 class_list = 1:length(C);
 
-[P,N] = size(Xnew);
+P = size(Xnew,1);
 label = zeros(P,1);
 for inst = 1:P
     probability = histc(Y,class_list)/length(Y);
@@ -40,12 +40,10 @@ for inst = 1:P
         standard_deviation = std(data);
         average = mean(data);
 
-        for i = 1:N
-            gauss = 1/(standard_deviation(i)*sqrt(2*pi))*...
-                exp(-1/2*((Xnew(inst,i)-average(i))/standard_deviation(i))^2);
+        gauss = 1./(standard_deviation.*sqrt(2.*pi))...
+            .*exp(-1/2.*((Xnew(inst,:)-average)./standard_deviation).^2);
         
-            probability(j) = probability(j)*gauss;
-        end
+        probability(j) = probability(j)*prod(gauss);
     end
     
     [~,I] = sort(probability,'descend');

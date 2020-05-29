@@ -41,8 +41,7 @@ for inst = 1:P
         S = std(A);
         
         % Probability density function (PDF) of the normal distribution
-        gauss = 1./(S.*sqrt(2.*pi))...
-            .*exp(-1/2.*((Xnew(inst,:)-mean(A))./S).^2);
+        gauss = 1./(S.*sqrt(2.*pi)).*exp(-1/2.*((Xnew(inst,:)-mean(A))./S).^2);
         
         % Product
         probability(j) = probability(j)*prod(gauss);

@@ -39,11 +39,10 @@ for inst = 1:P
     for j = class_list
         data = X(Y==j,:);
         standard_deviation = std(data);
-        average = mean(data);
         
         % Probability density function (PDF) of the normal distribution
         gauss = 1./(standard_deviation.*sqrt(2.*pi))...
-            .*exp(-1/2.*((Xnew(inst,:)-average)./standard_deviation).^2);
+            .*exp(-1/2.*((Xnew(inst,:)-mean(data))./standard_deviation).^2);
         
         % Product
         probability(j) = probability(j)*prod(gauss);

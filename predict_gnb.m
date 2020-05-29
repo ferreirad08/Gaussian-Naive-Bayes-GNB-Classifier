@@ -33,24 +33,22 @@ binranges = 1:numel(C);
 
 P = size(Xnew,1);
 label = zeros(P,1);
-for inst = 1:P
+for i = 1:P
     % Class prior probability
     probability = histc(Y,binranges)/numel(Y);
     for j = binranges
         A = X(Y==j,:);
         S = std(A);
-        
         % Probability density function (PDF) of the normal distribution
         gauss = 1./(S.*sqrt(2.*pi))...
-            .*exp(-1/2.*((Xnew(inst,:)-mean(A))./S).^2);
-        
+            .*exp(-1/2.*((Xnew(i,:)-mean(A))./S).^2);
         % Product
         probability(j) = probability(j)*prod(gauss);
     end
     
     % Sort the probabilities in descending order and check the estimated label
     [~,I] = sort(probability,'descend');
-    label(inst) = I(1);
+    label(i) = I(1);
 end
 
 label = C(label);

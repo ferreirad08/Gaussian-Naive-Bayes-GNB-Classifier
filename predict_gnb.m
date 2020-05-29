@@ -1,0 +1,56 @@
+function label = predict_gnb(X,Y,Xnew)
+%Gaussian Naive Bayes Classifier (GNB)
+%
+%Author: David Ferreira - Federal University of Amazonas
+%Contact: ferreirad08@gmail.com
+%
+%predict_gnb
+%
+%Syntax
+%1. label = predict_gnb(X,Y,Xnew)
+%
+%Description 
+%1. Returns the estimated labels of one or multiple test instances.
+%
+%X is an M-by-N matrix, with M instances of N features. 
+%Y is an M-by-1 matrix, with respective M labels to each training instance. 
+%Xnew is an P-by-N matrix, with P instances of N features to be classified.
+%
+%Examples
+%1.
+%     load fisheriris
+%     X = meas;
+%     Y = species;
+%     Xnew = [min(meas);mean(meas);max(meas)];
+%     label = predict_gnb(X,Y,Xnew)
+%     label = 
+%         'setosa'
+%         'versicolor'
+%         'virginica'
+
+[C,~,Y] = unique(Y,'stable');
+class_list = 1:length(C);
+
+[P,N] = size(Xnew);
+label = zeros(P,1);
+for inst = 1:P
+    probability = histc(Y,class_list)/length(Y);
+    for j = class_list
+        data = X(Y==j,:);
+        standard_deviation = std(data);
+        average = mean(data);
+
+        for i = 1:N
+            gauss = 1/(standard_deviation(i)*sqrt(2*pi))*...
+                exp(-1/2*((Xnew(inst,i)-average(i))/standard_deviation(i))^2);
+        
+            probability(j) = probability(j)*gauss;
+        end
+    end
+    
+    [~,I] = sort(probability,'descend');
+    label(inst) = I(1);
+end
+
+label = C(label);
+end

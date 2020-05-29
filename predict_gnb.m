@@ -37,12 +37,12 @@ for inst = 1:P
     % Class prior probability
     probability = histc(Y,class_list)/length(Y);
     for j = class_list
-        data = X(Y==j,:);
-        standard_deviation = std(data);
+        A = X(Y==j,:);
+        S = std(A);
         
         % Probability density function (PDF) of the normal distribution
-        gauss = 1./(standard_deviation.*sqrt(2.*pi))...
-            .*exp(-1/2.*((Xnew(inst,:)-mean(data))./standard_deviation).^2);
+        gauss = 1./(S.*sqrt(2.*pi))...
+            .*exp(-1/2.*((Xnew(inst,:)-mean(A))./S).^2);
         
         % Product
         probability(j) = probability(j)*prod(gauss);

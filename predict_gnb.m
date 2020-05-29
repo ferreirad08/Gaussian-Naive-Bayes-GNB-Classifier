@@ -49,6 +49,7 @@ for inst = 1:P
         probability(j) = probability(j)*prod(gauss);
     end
     
+    % Sort the probabilities in descending order and check the estimated label
     [~,I] = sort(probability,'descend');
     label(inst) = I(1);
 end

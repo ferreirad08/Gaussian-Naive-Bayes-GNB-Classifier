@@ -1,5 +1,5 @@
 function label = predict_gnb(X,Y,Xnew)
-%Gaussian Naive Bayes Classifier (GNB)
+%Gaussian Naive Bayes (GNB) Classifier
 %
 %Author: David Ferreira - Federal University of Amazonas
 %Contact: ferreirad08@gmail.com
@@ -34,15 +34,18 @@ class_list = 1:length(C);
 P = size(Xnew,1);
 label = zeros(P,1);
 for inst = 1:P
+    % Class prior probability
     probability = histc(Y,class_list)/length(Y);
     for j = class_list
         data = X(Y==j,:);
         standard_deviation = std(data);
         average = mean(data);
-
+        
+        % Probability density function (PDF) of the normal distribution
         gauss = 1./(standard_deviation.*sqrt(2.*pi))...
             .*exp(-1/2.*((Xnew(inst,:)-average)./standard_deviation).^2);
         
+        % Product
         probability(j) = probability(j)*prod(gauss);
     end
     

@@ -21,3 +21,17 @@ Examples using Iris Data Set
         'setosa'
         'versicolor'
         'virginica'
+        
+        
+    Ynew = {'versicolor';'versicolor';'virginica'};
+    [label,accuracy] = predict_gnb(X,Y,Xnew,Ynew)
+    
+    label =
+    
+        'setosa'
+        'versicolor'
+        'virginica'
+        
+    accuracy =
+    
+        0.6667

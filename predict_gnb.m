@@ -1,5 +1,5 @@
-function label = predict_gnb(X,Y,Xnew)
-%Gaussian Naive Bayes (GNB) Classifier
+function [label,accuracy] = predict_gnb(X,Y,Xnew,Ynew)
+%Gaussian Naive Bayes (GNB)
 %
 %Author: David Ferreira - Federal University of Amazonas
 %Contact: ferreirad08@gmail.com
@@ -8,13 +8,16 @@ function label = predict_gnb(X,Y,Xnew)
 %
 %Syntax
 %1. label = predict_gnb(X,Y,Xnew)
+%2. [label,accuracy] = predict_gnb(X,Y,Xnew,Ynew)
 %
 %Description 
 %1. Returns the estimated labels of one or multiple test instances.
+%2. Returns the estimated labels of one or multiple test instances and the accuracy of the estimates.
 %
 %X is an M-by-N matrix, with M instances of N features. 
 %Y is an M-by-1 matrix, with respective M labels to each training instance. 
 %Xnew is an P-by-N matrix, with P instances of N features to be classified.
+%Ynew is an P-by-1 matrix, with respective P labels to each test instance (Used to check the accuracy between 0 and 1).
 %
 %Examples
 %1.
@@ -27,6 +30,16 @@ function label = predict_gnb(X,Y,Xnew)
 %         'setosa'
 %         'versicolor'
 %         'virginica'
+%
+%2.
+%     Ynew = {'versicolor';'versicolor';'virginica'};
+%     [label,accuracy] = predict_gnb(X,Y,Xnew,Ynew)
+%     label = 
+%         'setosa'
+%         'versicolor'
+%         'virginica'
+%     accuracy =
+%         0.6667
 
 [C,~,Y] = unique(Y,'stable');
 binranges = 1:numel(C);
@@ -49,6 +62,12 @@ for i = 1:P
     % Sort the probabilities in descending order and check the estimated label
     [~,I] = sort(probability,'descend');
     label(i) = I(1);
+end
+
+% Check the number of input and output arguments
+if nargin > 3 && nargout > 1
+    [~,Ynew] = ismember(Ynew,C);
+    accuracy = sum(label==Ynew)/P;
 end
 
 label = C(label);

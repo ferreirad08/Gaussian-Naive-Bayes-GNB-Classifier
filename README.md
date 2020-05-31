@@ -6,7 +6,7 @@ Function
 1. predict_gnb
 
 Description 
-1. Returns the estimated labels of one or multiple test instances.
+1. Returns the estimated labels of one or multiple test instances and the accuracy of the estimates.
 
 Examples using Iris Data Set
 

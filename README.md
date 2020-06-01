@@ -4,9 +4,11 @@
 
 Function 
 1. predict_gnb
+2. find_gnb
 
 Description 
 1. Returns the estimated labels of one or multiple test instances and the accuracy of the estimates.
+2. Returns the k nearest training instances, the k nearest training labels and the respective distances.
 
 Examples using Iris Data Set
 
@@ -35,3 +37,5 @@ Examples using Iris Data Set
     accuracy =
     
         0.6667
+
+See more examples described in the script files.

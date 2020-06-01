@@ -8,7 +8,7 @@ Function
 
 Description 
 1. Returns the estimated labels of one or multiple test instances and the accuracy of the estimates.
-2. Returns the k nearest training instances, the k nearest training labels and the respective distances.
+2. Returns the labels with their respective probabilities in descending order.
 
 Examples using Iris Data Set
 

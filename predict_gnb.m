@@ -51,7 +51,7 @@ for i = 1:P
     probability = histc(Y,binranges)/numel(Y);
     for j = binranges
         A = X(Y==j,:);
-        S = std(A);
+        S = std(A,1);
         % Probability density function (PDF) of the normal distribution
         gauss = 1./(S.*sqrt(2.*pi))...
             .*exp(-1/2.*((Xnew(i,:)-mean(A))./S).^2);

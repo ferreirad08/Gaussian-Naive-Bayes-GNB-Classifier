@@ -47,9 +47,7 @@ for j = binranges
     probability(j) = probability(j)*prod(gauss);
 end
 
-% Sort the probabilities in descending order with their respective labels
-[probabilities,I] = sort(probability,'descend');
+% Sort the normalized probabilities in descending order with their respective labels
+[probabilities,I] = sort(probability/sum(probability),'descend');
 labels = C(I);
-% Normalizes the probabilities
-probabilities = probabilities/sum(probabilities);
 end

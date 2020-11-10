@@ -30,7 +30,7 @@ Examples using Iris Data Set
         
         
     Ynew = {'versicolor';'versicolor';'virginica'};
-    accuracy = accuracy_score(Xpred,Ynew)
+    accuracy = accuracy_score(Ypred,Ynew)
     
     accuracy =
     

@@ -1,10 +1,10 @@
 # Naive Bayes (NB) Classifier
 
-[![View Gaussian Naive Bayes (GNB) Classifier on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/76355-gaussian-naive-bayes-gnb-classifier)
+[![View Naive Bayes (NB) Classifier on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/76355-naive-bayes-nb-classifier)
 
 Function 
-1. predict_gnb
-2. find_gnb
+1. NaiveBayes.predict(_)
+2. NaiveBayes.find(_)
 
 Description 
 1. Returns the estimated labels of one or multiple test instances and the accuracy of the estimates.
@@ -13,12 +13,16 @@ Description
 Examples using Iris Data Set
 
     load fisheriris
+
     X = meas;
     Y = species;
     Xnew = [min(X);mean(X);max(X)];
-    label = predict_gnb(X,Y,Xnew)
+
+    mdl = NaiveBayes('gaussian');
+    mdl = mdl.fit(X,Y)
+    Ypred = mdl.predict(Xnew)
     
-    label =
+    Ypred =
     
         'setosa'
         'versicolor'
@@ -26,14 +30,8 @@ Examples using Iris Data Set
         
         
     Ynew = {'versicolor';'versicolor';'virginica'};
-    [label,accuracy] = predict_gnb(X,Y,Xnew,Ynew)
+    accuracy = accuracy_score(Xpred,Ynew)
     
-    label =
-    
-        'setosa'
-        'versicolor'
-        'virginica'
-        
     accuracy =
     
         0.6667

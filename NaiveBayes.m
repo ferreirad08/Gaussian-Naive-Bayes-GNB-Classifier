@@ -3,7 +3,7 @@ classdef NaiveBayes
 %
 % Author: M.Sc. David Ferreira - Federal University of Amazonas
 % Contact: ferreirad08@gmail.com
-% Date: October 2020
+% Date: May 2020
 
 properties
     PDF = 'gaussian' % Probability density function
